@@ -29,22 +29,15 @@ int main(void) {
         printf("Escolha uma opcao: ");
         opcao = lerInteiro();
 
-        if (opcao == 1) {
-            menuJogadores();
-        } else if (opcao == 2) {
-            menuJogos();
-        } else if (opcao == 3) {
-            menuComunidades();
-        } else if (opcao == 4) {
-            menuMembros();
-        } else if (opcao == 5) {
-            menuEventos();
-        } else if (opcao == 6) {
-            menuRelatorios();
-        } else if (opcao == 0) {
-            printf("\nEncerrando Desmoz...\n");
-        } else {
-            printf("\nOpcao invalida! Tente novamente.\n");
+        switch (opcao) {
+            case 1: menuJogadores(); break;
+            case 2: menuJogos(); break;
+            case 3: menuComunidades(); break;
+            case 4: menuMembros(); break;
+            case 5: menuEventos(); break;
+            case 6: menuRelatorios(); break;
+            case 0: printf("\nEncerrando Desmoz...\n"); break;
+            default: printf("\nOpcao invalida! Tente novamente.\n");
         }
     } while (opcao != 0);
 

@@ -138,14 +138,11 @@ void menuJogos(void) {
         printf("Escolha uma opcao: ");
         opcao = lerNumeroEntre(0, 4);
 
-        if (opcao == 1) {
-            cadastrarJogo();
-        } else if (opcao == 2) {
-            listarJogos();
-        } else if (opcao == 3) {
-            buscarJogoPorCodigo();
-        } else if (opcao == 4) {
-            alterarJogo();
+        switch (opcao) {
+            case 1: cadastrarJogo(); break;
+            case 2: listarJogos(); break;
+            case 3: buscarJogoPorCodigo(); break;
+            case 4: alterarJogo(); break;
         }
     } while (opcao != 0);
 }

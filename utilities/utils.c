@@ -4,9 +4,7 @@
 
 int entradaAcabou = 0;
 
-// ------------------------------------------------------------------
 // Texto (strings sao vetores de char terminados por '\0')
-// ------------------------------------------------------------------
 
 int temFimDeLinha(char texto[]) {
     int i = 0;
@@ -68,10 +66,7 @@ int textosIguais(char a[], char b[]) {
         }
         i++;
     }
-    if (a[i] == b[i]) {    
-        return 1;
-    }
-    return 0;
+    return a[i] == b[i];
 }
 
 void copiarTexto(char destino[], char origem[]) {
@@ -84,9 +79,7 @@ void copiarTexto(char destino[], char origem[]) {
     destino[i] = '\0';
 }
 
-// ------------------------------------------------------------------
 // Numeros
-// ------------------------------------------------------------------
 
 int textoParaInteiro(char texto[], int *numero) {
     int i = 0;
@@ -137,9 +130,7 @@ int perguntarSimNao(char pergunta[]) {
     return lerNumeroEntre(0, 1);
 }
 
-// ------------------------------------------------------------------
 // Datas
-// ------------------------------------------------------------------
 
 int diasNoMes(int mes, int ano) {
     static const int dias[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};

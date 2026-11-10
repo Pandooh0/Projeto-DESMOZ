@@ -9,9 +9,7 @@
 Evento eventos[MAX_EVENTOS];
 int totalEventos = 0;
 
-// ------------------------------------------------------------------
 // Consultas
-// ------------------------------------------------------------------
 int buscarEvento(int codigo) {
     int i;
 
@@ -50,9 +48,7 @@ int contarEventosDaComunidade(int codComunidade, int i) {
     return total;
 }
 
-// ------------------------------------------------------------------
 // Exibicao
-// ------------------------------------------------------------------
 
 void mostrarEvento(int i) {
     printf("\nCodigo: %d\n", eventos[i].codigo);
@@ -129,9 +125,7 @@ void listarParticipantesDoEvento(int codEvento) {
     }
 }
 
-// ------------------------------------------------------------------
 // Criar evento
-// ------------------------------------------------------------------
 
 int escolherComunidadeDoEvento(void) {
     int codigo;
@@ -212,9 +206,7 @@ void criarEvento(void) {
     printf("Evento criado! Codigo: %d\n", novo.codigo);
 }
 
-// ------------------------------------------------------------------
 // Demais operacoes
-// ------------------------------------------------------------------
 
 void buscarEventoPorCodigo(void) {
     int pos;
@@ -335,18 +327,13 @@ void menuEventos(void) {
         printf("Escolha uma opcao: ");
         opcao = lerNumeroEntre(0, 6);
 
-        if (opcao == 1) {
-            criarEvento();
-        } else if (opcao == 2) {
-            listarEventos();
-        } else if (opcao == 3) {
-            buscarEventoPorCodigo();
-        } else if (opcao == 4) {
-            registrarParticipacao();
-        } else if (opcao == 5) {
-            consultarParticipantes();
-        } else if (opcao == 6) {
-            cancelarEvento();
+        switch (opcao) {
+            case 1: criarEvento(); break;
+            case 2: listarEventos(); break;
+            case 3: buscarEventoPorCodigo(); break;
+            case 4: registrarParticipacao(); break;
+            case 5: consultarParticipantes(); break;
+            case 6: cancelarEvento(); break;
         }
     } while (opcao != 0);
 }

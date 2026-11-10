@@ -231,18 +231,13 @@ void menuComunidades(void) {
         printf("Escolha uma opcao: ");
         opcao = lerNumeroEntre(0, 6);
 
-        if (opcao == 1) {
-            criarComunidade();
-        } else if (opcao == 2) {
-            listarComunidades();
-        } else if (opcao == 3) {
-            buscarComunidadePorCodigo();
-        } else if (opcao == 4) {
-            alterarComunidade();
-        } else if (opcao == 5) {
-            consultarMembros();
-        } else if (opcao == 6) {
-            consultarEventos();
+        switch (opcao) {
+            case 1: criarComunidade(); break;
+            case 2: listarComunidades(); break;
+            case 3: buscarComunidadePorCodigo(); break;
+            case 4: alterarComunidade(); break;
+            case 5: consultarMembros(); break;
+            case 6: consultarEventos(); break;
         }
     } while (opcao != 0);
 }
