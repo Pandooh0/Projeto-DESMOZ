@@ -13,7 +13,7 @@ int  buscarEvento(int codigo);
 int  totalDeEventos(void);
 int  contarEventosAbertos(void);
 
-// RECURSIVA: conta os eventos de uma comunidade (chame com i = 0)
+// Conta os eventos de uma comunidade (chame com i = 0)
 int  contarEventosDaComunidade(int codComunidade, int i);
 
 // Usadas por comunidades.c e relatorios.c

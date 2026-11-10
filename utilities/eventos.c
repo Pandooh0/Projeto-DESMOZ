@@ -40,13 +40,14 @@ int contarEventosAbertos(void) {
 }
 
 int contarEventosDaComunidade(int codComunidade, int i) {
-    if (i >= totalEventos) {       
-        return 0;
+    int total = 0;
+
+    for (; i < totalEventos; i++) {
+        if (eventos[i].codComunidade == codComunidade) {
+            total++;
+        }
     }
-    if (eventos[i].codComunidade == codComunidade) {
-        return 1 + contarEventosDaComunidade(codComunidade, i + 1);
-    }
-    return contarEventosDaComunidade(codComunidade, i + 1);
+    return total;
 }
 
 // ------------------------------------------------------------------

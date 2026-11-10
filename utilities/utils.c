@@ -23,6 +23,8 @@ int temFimDeLinha(char texto[]) {
 void lerTexto(char destino[], int tamanho) {
     char linha[TAM_LINHA];
     int i = 0;
+    int copiados = 0;
+    int fimDeLinha = 0;
 
     if (fgets(linha, TAM_LINHA, stdin) == NULL) {
         entradaAcabou = 1;
@@ -30,13 +32,20 @@ void lerTexto(char destino[], int tamanho) {
         return;
     }
 
-    while (linha[i] != '\n' && linha[i] != '\0' && i < tamanho - 1) {
-        destino[i] = linha[i];
+    while (linha[i] != '\0') {
+        if (linha[i] == '\n') {
+            fimDeLinha = 1;
+            break;
+        }
+        if (copiados < tamanho - 1) {
+            destino[copiados] = linha[i];
+            copiados++;
+        }
         i++;
     }
-    destino[i] = '\0';
+    destino[copiados] = '\0';
 
-    if (temFimDeLinha(linha) == 0) {
+    if (fimDeLinha == 0) {
         while (fgets(linha, TAM_LINHA, stdin) != NULL && temFimDeLinha(linha) == 0) {
         }
     }
@@ -133,7 +142,7 @@ int perguntarSimNao(char pergunta[]) {
 // ------------------------------------------------------------------
 
 int diasNoMes(int mes, int ano) {
-    int dias[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    static const int dias[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     if (mes == 2 && ((ano % 4 == 0 && ano % 100 != 0) || ano % 400 == 0)) {
         return 29;
