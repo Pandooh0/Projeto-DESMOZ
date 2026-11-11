@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "estruturas.h"
 #include "jogos.h"
 #include "utils.h"
@@ -67,7 +68,7 @@ void cadastrarJogo(void) {
     lerTextoObrigatorio(novo.nome, TAM_TEXTO);
 
     for (i = 0; i < totalJogos; i++) {
-        if (textosIguais(jogos[i].nome, novo.nome) == 1) {
+        if (strcmp(jogos[i].nome, novo.nome) == 0) {
             printf("Esse jogo ja esta no catalogo.\n");
             return;
         }

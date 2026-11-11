@@ -1,7 +1,3 @@
-/*
- * comunidades.h
- * Criacao e consulta de comunidades.
- */
 #ifndef COMUNIDADES_H
 #define COMUNIDADES_H
 

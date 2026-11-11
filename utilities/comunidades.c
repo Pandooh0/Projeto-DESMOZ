@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "estruturas.h"
 #include "comunidades.h"
 #include "jogos.h"
@@ -54,7 +55,7 @@ void mostrarComunidade(int i) {
     printf("\nResponsavel: ");
     mostrarNomeJogador(comunidades[i].codResponsavel);
     printf("\nMembros: %d\n", contarMembros(comunidades[i].codigo));
-    printf("Eventos: %d\n", contarEventosDaComunidade(comunidades[i].codigo, 0));
+    printf("Eventos: %d\n", contarEventosDaComunidade(comunidades[i].codigo));
 }
 
 void listarComunidades(void) {
@@ -108,7 +109,7 @@ void criarComunidade(void) {
     lerTextoObrigatorio(nova.nome, TAM_TEXTO);
 
     for (i = 0; i < totalComunidades; i++) {
-        if (textosIguais(comunidades[i].nome, nova.nome) == 1) {
+        if (strcmp(comunidades[i].nome, nova.nome) == 0) {
             printf("Ja existe uma comunidade com esse nome.\n");
             return;
         }
@@ -171,7 +172,7 @@ void alterarComunidade(void) {
     lerTextoObrigatorio(copia.nome, TAM_TEXTO);
 
     for (i = 0; i < totalComunidades; i++) {
-        if (i != pos && textosIguais(comunidades[i].nome, copia.nome) == 1) {
+        if (i != pos && strcmp(comunidades[i].nome, copia.nome) == 0) {
             printf("Ja existe outra comunidade com esse nome.\n");
             return;
         }
@@ -180,8 +181,8 @@ void alterarComunidade(void) {
     printf("Nova descricao (pode deixar vazia): ");
     lerTexto(copia.descricao, TAM_DESCRICAO);
 
-    copiarTexto(comunidades[pos].nome, copia.nome);
-    copiarTexto(comunidades[pos].descricao, copia.descricao);
+    strcpy(comunidades[pos].nome, copia.nome);
+    strcpy(comunidades[pos].descricao, copia.descricao);
 
     printf("Comunidade alterada com sucesso!\n");
 }

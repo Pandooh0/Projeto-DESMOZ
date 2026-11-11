@@ -8,7 +8,7 @@
 #include "relatorios.h"
 #include "utils.h"
 
-void exibirMenuPrincipal(void) {
+static void exibirMenuPrincipal(void) {
     printf("\n===== DESMOZ =====\n");
     printf("1 - Gerenciar jogadores\n");
     printf("2 - Gerenciar jogos\n");

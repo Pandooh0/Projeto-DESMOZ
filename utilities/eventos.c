@@ -37,10 +37,10 @@ int contarEventosAbertos(void) {
     return abertos;
 }
 
-int contarEventosDaComunidade(int codComunidade, int i) {
-    int total = 0;
+int contarEventosDaComunidade(int codComunidade) {
+    int i, total = 0;
 
-    for (; i < totalEventos; i++) {
+    for (i = 0; i < totalEventos; i++) {
         if (eventos[i].codComunidade == codComunidade) {
             total++;
         }

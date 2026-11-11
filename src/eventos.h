@@ -12,9 +12,10 @@ void criarEvento(void);
 int  buscarEvento(int codigo);
 int  totalDeEventos(void);
 int  contarEventosAbertos(void);
+void listarEventos(void);
 
-// Conta os eventos de uma comunidade (chame com i = 0)
-int  contarEventosDaComunidade(int codComunidade, int i);
+// Conta os eventos de uma comunidade.
+int  contarEventosDaComunidade(int codComunidade);
 
 // Usadas por comunidades.c e relatorios.c
 void listarEventosDaComunidade(int codComunidade);

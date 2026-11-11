@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "estruturas.h"
 #include "utils.h"
 
@@ -6,23 +8,11 @@ int entradaAcabou = 0;
 
 // Texto (strings sao vetores de char terminados por '\0')
 
-int temFimDeLinha(char texto[]) {
-    int i = 0;
-
-    while (texto[i] != '\0') {
-        if (texto[i] == '\n') {
-            return 1;
-        }
-        i++;
-    }
-    return 0;
-}
-
 void lerTexto(char destino[], int tamanho) {
     char linha[TAM_LINHA];
-    int i = 0;
-    int copiados = 0;
-    int fimDeLinha = 0;
+    size_t comprimento;
+
+    if (tamanho <= 0) return;
 
     if (fgets(linha, TAM_LINHA, stdin) == NULL) {
         entradaAcabou = 1;
@@ -30,21 +20,13 @@ void lerTexto(char destino[], int tamanho) {
         return;
     }
 
-    while (linha[i] != '\0') {
-        if (linha[i] == '\n') {
-            fimDeLinha = 1;
-            break;
-        }
-        if (copiados < tamanho - 1) {
-            destino[copiados] = linha[i];
-            copiados++;
-        }
-        i++;
-    }
-    destino[copiados] = '\0';
+    comprimento = strcspn(linha, "\n");
+    if (comprimento >= (size_t)tamanho) comprimento = (size_t)tamanho - 1;
+    memcpy(destino, linha, comprimento);
+    destino[comprimento] = '\0';
 
-    if (fimDeLinha == 0) {
-        while (fgets(linha, TAM_LINHA, stdin) != NULL && temFimDeLinha(linha) == 0) {
+    if (strchr(linha, '\n') == NULL) {
+        while (fgets(linha, TAM_LINHA, stdin) != NULL && strchr(linha, '\n') == NULL) {
         }
     }
 }
@@ -57,48 +39,15 @@ void lerTextoObrigatorio(char destino[], int tamanho) {
     }
 }
 
-int textosIguais(char a[], char b[]) {
-    int i = 0;
-
-    while (a[i] != '\0' && b[i] != '\0') {
-        if (a[i] != b[i]) {
-            return 0;
-        }
-        i++;
-    }
-    return a[i] == b[i];
-}
-
-void copiarTexto(char destino[], char origem[]) {
-    int i = 0;
-
-    while (origem[i] != '\0') {
-        destino[i] = origem[i];
-        i++;
-    }
-    destino[i] = '\0';
-}
-
 // Numeros
 
 int textoParaInteiro(char texto[], int *numero) {
-    int i = 0;
-    int resultado = 0;
+    size_t tamanho = strlen(texto);
 
-    if (texto[0] == '\0') {
+    if (tamanho == 0 || tamanho > 9 || strspn(texto, "0123456789") != tamanho)
         return 0;
-    }
-    while (texto[i] != '\0') {
-        if (texto[i] < '0' || texto[i] > '9') {
-            return 0;             
-        }
-        if (i >= 9) {
-            return 0;            
-        }
-        resultado = resultado * 10 + (texto[i] - '0');
-        i++;
-    }
-    *numero = resultado;
+
+    *numero = (int)strtol(texto, NULL, 10);
     return 1;
 }
 
@@ -135,6 +84,10 @@ int perguntarSimNao(char pergunta[]) {
 int diasNoMes(int mes, int ano) {
     static const int dias[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+    if (mes < 1 || mes > 12 || ano < 1) {
+        return 0;
+    }
+
     if (mes == 2 && ((ano % 4 == 0 && ano % 100 != 0) || ano % 400 == 0)) {
         return 29;
     }
@@ -152,10 +105,10 @@ void lerData(int *dia, int *mes, int *ano) {
         printf("  Ano (2024 a 2100): ");
         *ano = lerNumeroEntre(2024, 2100);
 
-        if (*dia <= diasNoMes(*mes, *ano)) {
+        if (dataValida(*dia, *mes, *ano)) {
             valida = 1;
         } else {
-            printf("Data invalida: esse mes nao tem %d dias. Digite novamente.\n", *dia);
+            printf("Data invalida. Digite novamente.\n");
         }
     }
 }
